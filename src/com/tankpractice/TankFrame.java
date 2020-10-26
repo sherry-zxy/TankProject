@@ -29,26 +29,62 @@ public class TankFrame extends Frame {
     //重写frame的方法
     @Override
     public void paint(Graphics g){
-        System.out.println("paint");
+        //System.out.println("paint");
         g.fillRect(x,y,50,50);
-        x += 10;//go right
+       // x += 10;//go right
        // y += 10;//go down
 
     }
 
     //键盘监听处理类
     class MyKeyListener extends KeyAdapter{
-
+        boolean bL = false;
+        boolean bU = false;
+        boolean bR = false;
+        boolean bD = false;
         @Override
         public void keyPressed(KeyEvent e) {
-          // x+= 200;
-           //窗口重画
-           // repaint();
+            int key = e.getKeyCode();
+            switch (key){
+                case KeyEvent.VK_LEFT:
+                    bL = true;
+                    break;
+                case KeyEvent.VK_UP:
+                    bU = true;
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    bR = true;
+                    break;
+                case KeyEvent.VK_DOWN:
+                    bD = true;
+                    break;
+                default:
+                    break;
+            }
+            //x+= 200;
+            // 窗口重画
+            // repaint();
         }
 
         @Override
         public void keyReleased(KeyEvent e) {
-            System.out.println("key released");
+            int key = e.getKeyCode();
+            switch (key){
+                case KeyEvent.VK_LEFT:
+                    bL = false;
+                    break;
+                case KeyEvent.VK_UP:
+                    bU = false;
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    bR = false;
+                    break;
+                case KeyEvent.VK_DOWN:
+                    bD = false;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
