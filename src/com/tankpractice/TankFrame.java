@@ -10,6 +10,8 @@ import java.awt.Graphics;
 public class TankFrame extends Frame {
 
     int x = 200, y = 200;
+    Dir dir = Dir.DOWN;//initial
+    private static final int SPEED = 10; //常量
 
     public TankFrame() {
         setSize(800,600);
@@ -17,6 +19,7 @@ public class TankFrame extends Frame {
         setTitle("tank war");
         setVisible(true);
         this.addKeyListener(new MyKeyListener());
+
         //添加window监听器来判断怎么关windows=>点击关闭
         //点击关闭发出事件-> 处理事件-> system close
         addWindowListener(new WindowAdapter() {//windowAdapter是匿名类，实现了windowListener的接口,它的子类
@@ -31,6 +34,20 @@ public class TankFrame extends Frame {
     public void paint(Graphics g){
         //System.out.println("paint");
         g.fillRect(x,y,50,50);
+        switch (dir){
+            case LEFT:
+                x -= SPEED;
+                break;
+            case UP:
+                y -= SPEED;
+                break;
+            case RIGHT:
+                x += SPEED;
+                break;
+            case DOWN:
+                y += SPEED;
+                break;
+        }
        // x += 10;//go right
        // y += 10;//go down
 
@@ -42,6 +59,7 @@ public class TankFrame extends Frame {
         boolean bU = false;
         boolean bR = false;
         boolean bD = false;
+
         @Override
         public void keyPressed(KeyEvent e) {
             int key = e.getKeyCode();
@@ -61,9 +79,8 @@ public class TankFrame extends Frame {
                 default:
                     break;
             }
-            //x+= 200;
-            // 窗口重画
-            // repaint();
+            setTankDir();
+
         }
 
         @Override
@@ -85,6 +102,13 @@ public class TankFrame extends Frame {
                 default:
                     break;
             }
+            setTankDir();
+        }
+        public void setTankDir(){
+            if(bL) dir = Dir.LEFT;
+            if(bU) dir = Dir.UP;
+            if(bR) dir = Dir.RIGHT;
+            if(bD) dir = Dir.DOWN;
         }
     }
 }
