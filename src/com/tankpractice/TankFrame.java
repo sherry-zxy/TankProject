@@ -1,13 +1,16 @@
 package com.tankpractice;
-import java.awt.*;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.Frame;
+import java.awt.Graphics;
 
 public class TankFrame extends Frame {
 
+    int x = 200, y = 200;
 
-    public TankFrame() throws HeadlessException {
-       setSize(800,600);
+    public TankFrame() {
+        setSize(800,600);
         setResizable(false);//can't be resized
         setTitle("tank war");
 
@@ -24,6 +27,10 @@ public class TankFrame extends Frame {
     //重写frame的方法
     @Override
     public void paint(Graphics g){
-        g.fillRect(200,200,50,50);
+        System.out.println("paint");
+        g.fillRect(x,y,50,50);
+        x += 10;//go right
+        y += 10;//go down
+
     }
 }
