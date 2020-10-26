@@ -1,5 +1,7 @@
 package com.tankpractice;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.Frame;
@@ -13,8 +15,8 @@ public class TankFrame extends Frame {
         setSize(800,600);
         setResizable(false);//can't be resized
         setTitle("tank war");
-
-       setVisible(true);
+        setVisible(true);
+        this.addKeyListener(new MyKeyListener());
         //添加window监听器来判断怎么关windows=>点击关闭
         //点击关闭发出事件-> 处理事件-> system close
         addWindowListener(new WindowAdapter() {//windowAdapter是匿名类，实现了windowListener的接口,它的子类
@@ -32,5 +34,19 @@ public class TankFrame extends Frame {
         x += 10;//go right
         y += 10;//go down
 
+    }
+
+    //键盘监听处理类
+    class MyKeyListener extends KeyAdapter{
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            System.out.println("Key pressed");
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            System.out.println("key released");
+        }
     }
 }
